@@ -59,6 +59,8 @@ class Workspace : public QTabWidget
     void removeWorkSheet();
     void removeWorkSheet( const QString &fileName );
     void removeAllWorkSheets();
+    void moveCurrentSheetLeft();
+    void moveCurrentSheetRight();
     void getHotNewWorksheet();
     void uploadHotNewWorksheet();
     void cut();

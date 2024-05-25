@@ -141,6 +141,13 @@ TopLevel::TopLevel()
   mConfigureSheetAction = actionCollection()->addAction( QStringLiteral("configure_sheet") );
   mConfigureSheetAction->setIcon( QIcon::fromTheme(QStringLiteral("configure")) );
   connect(mConfigureSheetAction, &QAction::triggered, this, &TopLevel::configureCurrentSheet);
+  mMoveTabLeftAction = actionCollection()->addAction( QStringLiteral("move_sheet_left") );
+  mMoveTabLeftAction->setIcon( QIcon::fromTheme(QStringLiteral("arrow-left-symbolic")) );
+  connect(mMoveTabLeftAction, &QAction::triggered, this, &TopLevel::moveCurrentSheetLeft);
+  mMoveTabRightAction = actionCollection()->addAction( QStringLiteral("move_sheet_right") );
+  mMoveTabRightAction->setIcon( QIcon::fromTheme(QStringLiteral("arrow-right-symbolic")) );
+  connect(mMoveTabRightAction, &QAction::triggered, this, &TopLevel::moveCurrentSheetRight);
+
   // set up 'Settings' menu
   mShowMenuBarAction = KStandardAction::showMenubar(this, &TopLevel::toggleShowMenuBar, actionCollection());
 
@@ -184,6 +191,8 @@ void TopLevel::retranslateUi()
   mHotNewWorksheetUploadAction->setText( i18n( "&Upload Current Tab..." ) );
 
   mConfigureSheetAction->setText( i18n( "Tab &Properties" ) );
+  mMoveTabLeftAction->setText( i18n( "Move Tab &left" ) );
+  mMoveTabRightAction->setText( i18n( "Move Tab &right" ) );
   if(mQuitAction) {
     QAction *tmpQuitAction = KStandardAction::quit( nullptr, nullptr, nullptr );
     mQuitAction->setText(tmpQuitAction->text());
@@ -198,6 +207,13 @@ void TopLevel::configureCurrentSheet() {
   mWorkSpace->configure();
   mRefreshTabAction->setVisible( mWorkSpace->currentWorkSheet()->updateInterval() == 0 );
 }
+void TopLevel::moveCurrentSheetLeft() {
+    mWorkSpace->moveCurrentSheetLeft();
+}
+void TopLevel::moveCurrentSheetRight() {
+    mWorkSpace->moveCurrentSheetRight();
+}
+
 void TopLevel::currentTabChanged(int index)
 {
   QWidget *wdg = mWorkSpace->widget(index);

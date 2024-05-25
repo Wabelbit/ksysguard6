@@ -76,6 +76,8 @@ class TopLevel : public KXmlGuiWindow, public KSGRD::SensorClient
     void currentTabChanged(int index);
     void updateProcessCount();
     void configureCurrentSheet();
+    void moveCurrentSheetLeft();
+    void moveCurrentSheetRight();
     void toggleShowMenuBar();
 
   private:
@@ -100,6 +102,8 @@ class TopLevel : public KXmlGuiWindow, public KSGRD::SensorClient
     QAction *mHotNewWorksheetAction;
     QAction *mQuitAction;
     QAction *mConfigureSheetAction;
+    QAction *mMoveTabLeftAction;
+    QAction *mMoveTabRightAction;
     QAction *mHotNewWorksheetUploadAction;
     QAction *mRefreshTabAction;
     QAction *mShowMenuBarAction;

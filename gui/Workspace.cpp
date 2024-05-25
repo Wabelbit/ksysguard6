@@ -40,6 +40,7 @@
 
 #include "Workspace.h"
 #include "ksysguard.h"
+#include "qtabbar.h"
 
 Workspace::Workspace( QWidget* parent)
   : QTabWidget( parent )
@@ -282,6 +283,21 @@ void Workspace::removeWorkSheet( const QString &fileName )
       return;
     }
   }
+}
+
+void Workspace::moveCurrentSheetLeft() {
+    const int current = currentIndex();
+    if(current > 0) {
+        mSheetList.move(current, current - 1);
+        tabBar()->moveTab(current, current - 1);
+    }
+}
+void Workspace::moveCurrentSheetRight() {
+    const int current = currentIndex();
+    if(current < tabBar()->count() - 1) {
+        mSheetList.move(current, current + 1);
+        tabBar()->moveTab(current, current + 1);
+    }
 }
 
 WorkSheet *Workspace::currentWorkSheet()
