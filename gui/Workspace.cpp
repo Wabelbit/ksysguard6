@@ -262,12 +262,6 @@ void Workspace::removeWorkSheet()
   }
 }
 
-void Workspace::tabMoved(int from, int to)
-{
-    mSheetList.swapItemsAt(from, to);
-}
-
-
 void Workspace::removeAllWorkSheets()
 {
   WorkSheet *sheet;
@@ -293,17 +287,9 @@ void Workspace::removeWorkSheet( const QString &fileName )
   }
 }
 
-void Workspace::moveCurrentSheetLeft() {
-    const int current = currentIndex();
-    if(current > 0) {
-        tabBar()->moveTab(current, current - 1);
-    }
-}
-void Workspace::moveCurrentSheetRight() {
-    const int current = currentIndex();
-    if(current < tabBar()->count() - 1) {
-        tabBar()->moveTab(current, current + 1);
-    }
+void Workspace::tabMoved(int from, int to)
+{
+    mSheetList.swapItemsAt(from, to);
 }
 
 WorkSheet *Workspace::currentWorkSheet()
