@@ -47,8 +47,10 @@ Workspace::Workspace( QWidget* parent)
 {
   KAcceleratorManager::setNoAccel(this);
   setSizePolicy(QSizePolicy::Expanding,QSizePolicy::Expanding);
+  setMovable(true);
   setDocumentMode(true);
   connect(&mDirWatch, SIGNAL(deleted(QString)), this, SLOT(removeWorkSheet(QString)));
+  connect(tabBar(), SIGNAL(tabMoved(int,int)), this, SLOT(tabMoved(int,int)));
 }
 
 Workspace::~Workspace()
@@ -260,6 +262,12 @@ void Workspace::removeWorkSheet()
   }
 }
 
+void Workspace::tabMoved(int from, int to)
+{
+    mSheetList.swapItemsAt(from, to);
+}
+
+
 void Workspace::removeAllWorkSheets()
 {
   WorkSheet *sheet;
@@ -288,14 +296,12 @@ void Workspace::removeWorkSheet( const QString &fileName )
 void Workspace::moveCurrentSheetLeft() {
     const int current = currentIndex();
     if(current > 0) {
-        mSheetList.move(current, current - 1);
         tabBar()->moveTab(current, current - 1);
     }
 }
 void Workspace::moveCurrentSheetRight() {
     const int current = currentIndex();
     if(current < tabBar()->count() - 1) {
-        mSheetList.move(current, current + 1);
         tabBar()->moveTab(current, current + 1);
     }
 }

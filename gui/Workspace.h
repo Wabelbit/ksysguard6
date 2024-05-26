@@ -31,6 +31,7 @@
 class KConfig;
 class QString;
 class WorkSheet;
+class KConfigGroup;
 
 class Workspace : public QTabWidget
 {
@@ -59,6 +60,7 @@ class Workspace : public QTabWidget
     void removeWorkSheet();
     void removeWorkSheet( const QString &fileName );
     void removeAllWorkSheets();
+    void tabMoved(int from, int to);
     void moveCurrentSheetLeft();
     void moveCurrentSheetRight();
     void getHotNewWorksheet();
